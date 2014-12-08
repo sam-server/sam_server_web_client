@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/cs_elements/qrcode/qrcode.html">
+
+<polymer-element name="asset-details">
+	<template>
+		<div id="card" horizontal layout>
+			<cs-qrcode id="qrcode" 
+					   value="{{qrcode}}" 
+					   correctionLevel="low"
+					   width="128"
+					   height="128"></cs-qrcode>
+			<div id="details">
+				<p>Name: {{name}}</p>
+				<p>Description: {{description}}</p>
+				<p>Price: {{price}}</p>
+			</div>
+		</div>
+	</template>
+	<script type="application/dart" src="asset_details.dart"></script>
+</polymer-element>

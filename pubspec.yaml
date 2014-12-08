@@ -1,0 +1,15 @@
+name: sam_server_web_client
+description: A sample web application
+dependencies:
+  browser: any
+  cs_elements:
+    path: /Users/ovangle/Programming/sam_server3_workspace/cs_elements
+  polymer: any
+  quiver: any
+transformers:
+- polymer:
+    entry_points:
+    - web/index.html
+    - example/asset_details.html
+    - example/asset_list.html
+    - example/main_context_example.html

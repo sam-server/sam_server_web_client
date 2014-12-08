@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/cs_elements/route/route.html">
+<link rel="import" href="../../../packages/cs_elements/context_pane/context_pane.html">
+
+<link rel="import" href="../../../packages/sam_server_web_client/asset_details/asset_details.html">
+<link rel="import" href="../../../packages/sam_server_web_client/asset_list/asset_list.html">
+
+<polymer-element name="main-context" attributes="href">
+  <template>
+    <cs-context-pane id="ctxt">
+      <!-- TODO: Remove this route when we're hosted on sam_server -->
+      <cs-route pattern="^http://localhost:8000/">
+        <cs-route pattern="assets/user/\d+">
+          <cs-route pattern="^/?$" tag="asset-list"></cs-route>
+          <cs-route pattern="^/asset/[0-9a-z]+/?$" tag="asset-details"></cs-route>
+        </cs-route>
+      </cs-route>
+    </cs-context-pane>
+  </template>
+  <script type="application/dart" src="main_context.dart"></script>
+</polymer-element>
