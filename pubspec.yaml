@@ -6,6 +6,7 @@ dependencies:
     path: /Users/ovangle/Programming/sam_server3_workspace/cs_elements
   polymer: any
   quiver: any
+  core_elements: '>=0.5.0'
 transformers:
 - polymer:
     entry_points:

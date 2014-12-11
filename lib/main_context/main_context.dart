@@ -1,21 +1,14 @@
 import 'package:polymer/polymer.dart';
-import 'package:cs_elements/context_pane/context_pane.dart';
+import 'package:cs_elements/context_panel/context_panel.dart';
 
 @CustomTag('main-context')
-class MainContext extends PolymerElement with DelegatingContextPane {
-  ContextPane get delegate => $['ctxt'];
+class MainContext extends ContextPanel {
   
-  String _tempHref = '';
+  @override
+  bool get trackHistory => true;
   
-  @published
-  String get href => readValue(#href, () => '');
-  set href(String value) => writeValue(#href, value);
-  hrefChanged(oldValue, newValue) {
-    if (delegate != null) {
-      delegate.href = newValue;
-    }
-  }
+  @override
+  String get trackName => "main-context";
   
   MainContext.created(): super.created();
-  
 }

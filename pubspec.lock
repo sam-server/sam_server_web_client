@@ -25,6 +25,14 @@ packages:
     description: collection
     source: hosted
     version: "1.1.0"
+  cookies:
+    description: cookies
+    source: hosted
+    version: "0.0.3"
+  core_elements:
+    description: core_elements
+    source: hosted
+    version: "0.5.0"
   crypto:
     description: crypto
     source: hosted
@@ -39,6 +47,10 @@ packages:
     description: csslib
     source: hosted
     version: "0.11.0+2"
+  custom_element_apigen:
+    description: custom_element_apigen
+    source: hosted
+    version: "0.1.2+1"
   html5lib:
     description: html5lib
     source: hosted
@@ -58,7 +70,7 @@ packages:
   observe:
     description: observe
     source: hosted
-    version: "0.12.1+1"
+    version: "0.12.2"
   path:
     description: path
     source: hosted
@@ -66,11 +78,11 @@ packages:
   polymer:
     description: polymer
     source: hosted
-    version: "0.15.1+5"
+    version: "0.15.2"
   polymer_expressions:
     description: polymer_expressions
     source: hosted
-    version: "0.13.0"
+    version: "0.13.0+1"
   pool:
     description: pool
     source: hosted
@@ -78,7 +90,7 @@ packages:
   quiver:
     description: quiver
     source: hosted
-    version: "0.19.0+1"
+    version: "0.18.2"
   smoke:
     description: smoke
     source: hosted
@@ -102,7 +114,7 @@ packages:
   template_binding:
     description: template_binding
     source: hosted
-    version: "0.13.1"
+    version: "0.14.0"
   utf:
     description: utf
     source: hosted
@@ -114,7 +126,7 @@ packages:
   web_components:
     description: web_components
     source: hosted
-    version: "0.9.0+1"
+    version: "0.10.0"
   yaml:
     description: yaml
     source: hosted

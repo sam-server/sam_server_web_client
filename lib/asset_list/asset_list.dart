@@ -6,10 +6,10 @@ import 'package:polymer/polymer.dart';
 import 'package:http/browser_client.dart';
 
 import 'package:cs_elements/qrcode/qrcode.dart';
-import 'package:cs_elements/context_pane/context_pane.dart';
+import 'package:cs_elements/context_panel/context_panel.dart';
 
 @CustomTag('asset-list')
-class AssetList extends PolymerElement implements Loadable {
+class AssetList extends PolymerElement implements LoadableElement {
   @observable
   List<Asset> assets = toObservable([]);
   
@@ -39,18 +39,16 @@ class AssetList extends PolymerElement implements Loadable {
   void displayAsset(Event e) {
     e.preventDefault();
     QRCode qrcodeElem = e.currentTarget;
-    assert(contextPane != null);
-    contextPane.href = qrcodeElem.value;
+    assert(contextPanel != null);
+    contextPanel.href = qrcodeElem.value;
   }
-
-  /**
-   * The context pane the asset list is loaded into. 
-   * Set once the item has finished loading.
-   */
-  ContextPane contextPane;
+  
+  /// Set once the element has loaded.
+  @override
+  ContextPanel contextPanel;
 
   @override
-  Future loadFromUri(String uri) {
+  Future loadFromUri(String uri, {Map<String,dynamic> restoreData}) {
     var client = new BrowserClient();
     print('fetching assets');
     return client.get(uri).then((result) {
@@ -60,13 +58,15 @@ class AssetList extends PolymerElement implements Loadable {
         return;
       }
       var content = JSON.decode(result.body);
-      print(content);
       assert(content['kind'] == 'assets#assets');
       for (var asset in content['assets']) {
         this.assets.add(new Asset.fromMap(asset));
       }
     });
   }
+  
+  @override
+  Map<String,dynamic> saveData() => <String,dynamic>{};
 }
 
 class Asset extends Observable {
