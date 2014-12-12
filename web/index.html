@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Sam</title>
-		
-		<link rel="import" href="packages/cs_elements/json_form/json_form.html">
-		
-		
-		<script async type="application/dart" src="packages/polymer/init.dart"></script>
-		<script async src="packages/browser/dart.js"></script>
-	</head>
-	
-	<body unresolved fullbleed>
-		<form is="cs-json-form" action="http://localhost:8000/assets/user/3">
-			<input type="submit">
-		</form>
-	</body>
+    <head>
+        <link rel="import"
+              href="packages/sam_server_web_client/main_context/main_context.html">
+        <link rel="import"
+              href="packages/cs_elements/session/session.html">
+        <script type="application/dart">
+            export 'package:polymer/init.dart';
+        </script>
+    </head>
+    <body fullbleed unresolved>
+        <h1>Test</h1>
+        <cs-session csrfToken="<% {csrf_token} %>"></cs-session>
+        <main-context href="<% {init_url} %>"></main-context>
+    </body>
 </html>
