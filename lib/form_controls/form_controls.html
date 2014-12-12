@@ -1,0 +1,18 @@
+
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/core_elements/core_icons.html">
+
+<polymer-element name="form-controls" attributes="disabled">
+  <template>
+    <div id="icons" layout horizontal>
+	    <template if="{{disabled}}">
+	      <core-icon id="edit" icon="create" on-click="{{handleEdit}}"></core-icon>
+	    </template>
+	    <template if="{{!disabled}}">
+	      <core-icon id="save" icon="save" on-click="{{handleSave}}"></core-icon>
+	      <core-icon id="cancel" icon="cancel" on-click="{{handleCancel}}"></core-icon>
+	    </template>
+    </div>
+  </template>
+  <script type="application/dart" src="form_controls.dart"></script>
+</polymer-element>
