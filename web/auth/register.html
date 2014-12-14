@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <link rel="import" href="packages/polymer/polymer.dart">
+    <link rel="import" href="packages/cs_elements/cs_session.html">
+    <link rel="import" href="packages/sam_server_web_client/signup_form.html">
+  </head>
+  
+  <body>
+    <cs-session csrfToken="<% csrf_token %>"></cs-session>
+    <signup-form></signup-form>
+  </body>
+</html>

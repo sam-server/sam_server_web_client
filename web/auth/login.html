@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <link rel="import" href="packages/polymer/polymer.html">
+    <link rel="import" href="packages/cs_elements/json_form/json_form.html">
+    <link rel="import" href="packages/cs_elements/session/session.html">
+    <link rel="import" href="packages/sam_server_web_client/auth/login_form/login_form.html">
+    
+    <script type="application/dart" src="/web/auth/login.dart"></script>
+  </head>
+  
+  <body fullbleed unresolved>
+    <cs-session csrfToken="<% {csrf_token} %>"></cs-session>
+    <login-form>
+    </login-form>
+    
+    <a href="/authentication/create_user">Signup</a>
+  </body>
+</html>

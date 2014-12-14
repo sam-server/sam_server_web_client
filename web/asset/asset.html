@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="import" href="../../../packages/polymer/polymer.html">
+    <link rel="import" href="../../../packages/core_elements/core_input.html">
+    
+    <link rel="import" href="../../../packages/cs_elements/qrcode/qrcode.html">
+    <link rel="import" href="../../../packages/cs_elements/json_form/json_form.html">
+    <link rel="import" href="../../../packages/cs_elements/money_input/money_input.html">
+    <link rel="import" href="../../../packages/cs_elements/session/session.html">
+    <link rel="import" href="../../../packages/sam_server_web_client/form_controls/form_controls.html">
+    
+    <script type="application/dart" src="/web/asset/asset.dart"></script>
+  </head>
+  
+  <body>
+    <cs-session csrfToken="<% {csrf_token} %>"></cs-session>
+    <form is="cs-json-form" method="PUT" id="assetForm" layout vertical>
+      <div id="nameContainer" layout horizontal>
+        <input is="core-input" id="name" type="text" 
+               name="name" value="<% name %>" 
+               disabled>
+        <form-controls disabled></form-controls>
+      </div>
+      <div id="outputContainer" layout horizontal>
+        <cs-qrcode id="qrcode" value="<% {qr_code} %>"
+                               correctionLevel="low"
+                               width="64"
+                               height="64">
+        </cs-qrcode>
+        <div id="detailsContainer" layout vertical>
+          <label>Description
+	          <input is="core-input" id="description"
+	                 name="description"
+	                 value="<% description %>"
+	                 disabled />
+          </label>
+          <label>Price
+            <input is="core-input"
+                   id="price"
+                   name="price"
+                   value="<% price %>"
+                   disabled />
+          </label>
+          <input type="hidden" name="kind" value="assets#asset" />
+        </div>  
+      </div>
+    </form>
+  </body>
+</html>
