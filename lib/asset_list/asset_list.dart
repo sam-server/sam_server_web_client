@@ -7,6 +7,7 @@ import 'package:http/browser_client.dart';
 
 import 'package:cs_elements/qrcode/qrcode.dart';
 import 'package:cs_elements/context_panel/context_panel.dart';
+import 'package:cs_elements/session/session.dart';
 
 @CustomTag('asset-list')
 class AssetList extends PolymerElement implements LoadableElement {
@@ -18,8 +19,7 @@ class AssetList extends PolymerElement implements LoadableElement {
   }
   
   void load(String href) {
-    var client = new BrowserClient();
-    print('fetching assets');
+    var client = session.httpClient;
     client.get(href).then((result) {
       if (result.statusCode != 200) {
         //TODO: Handle failure
@@ -49,7 +49,7 @@ class AssetList extends PolymerElement implements LoadableElement {
 
   @override
   Future loadFromUri(String uri, {Map<String,dynamic> restoreData}) {
-    var client = new BrowserClient();
+    var client = session.httpClient;
     print('fetching assets');
     return client.get(uri).then((result) {
       if (result.statusCode != 200) {
