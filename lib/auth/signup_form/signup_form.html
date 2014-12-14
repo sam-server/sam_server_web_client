@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_input.html">
+
+<link rel="import" href="../../../../packages/cs_elements/json_form.html">
+
+<link rel="import" href="../password_strength/password_strength.html">
+
+<polymer-element name="signup-form">
+  <template>
+    <form is="cs-json-form" action="POST">
+      <input is="core-input" type="text" name="username" placeholder="Username" value="{{username}}">
+      <input is="core-input" type="email" name="email" placeholder="Email" preventInvalidInput>
+      <input is="core-input" type="password" name="password" placeholder="Password">
+      <input is="core-input" type="password" id="confirmPassword" placeholder ="Re-enter password">
+    </form>
+  </template>
+  <script type="application/dart" src="signup_form.dart"></script>
+</polymer-element>
