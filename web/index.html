@@ -6,13 +6,12 @@
               href="packages/sam_server_web_client/main_context/main_context.html">
         <link rel="import"
               href="packages/cs_elements/session/session.html">
-        <script type="application/dart">
-            export 'package:polymer/init.dart';
-        </script>
+        <script type="application/dart" src="/web/index.dart"></script>
     </head>
     <body fullbleed unresolved>
         <h1>Test</h1>
         <cs-session csrfToken="<% {csrf_token} %>"></cs-session>
-        <main-context href="<% {init_url} %>"></main-context>
+        <asset-list>
+        </asset-list>
     </body>
 </html>
