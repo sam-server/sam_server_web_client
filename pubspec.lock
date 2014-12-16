@@ -91,6 +91,10 @@ packages:
     description: quiver
     source: hosted
     version: "0.18.2"
+  rational:
+    description: rational
+    source: hosted
+    version: "0.1.8+1"
   smoke:
     description: smoke
     source: hosted

@@ -7,14 +7,20 @@
 
 <link rel="import" href="../../../packages/cs_elements/qrcode/qrcode.html">
 <link rel="import" href="../../../packages/cs_elements/json_form/json_form.html">
+<link rel="import" href="../../../packages/cs_elements/money_input/money_input.html">
 
-<polymer-element name="asset-details">
+<link rel="import" href="../form_controls/form_controls.html">
+
+<polymer-element name="asset-details" attributes="qrcode formMethod">
 	<template>
     <style>
-      :host /deep/ input[is=core-input]#name {
+      /*  FIXME: These don't work as expected.
+       *  I've put them in a global stylesheet on asset.html
+       */
+      -webkit-distributed input[is=core-input]#name {
 	      font-size: 2em;
 	    }
-	    :host /deep/ input[is=core-input].editable {
+	    -webkit-distributed input[is=core-input].editable {
 	      border: 1px solid lightgrey;
 	    }
 	  
@@ -23,45 +29,33 @@
 	    }
 	   
 	    label {
-	      color: blue;
+	      color: blue; 
 	    }
 	  </style>
-    <form is="cs-json-form" method="post" id="mainform" layout vertical>
+    <form is="cs-json-form" method="{{formMethod}}" id="assetForm" layout vertical>
+      
       <div id="nameContainer" layout horizontal>
-        <input is="core-input" id="name" type="text" value="{{name}}" disabled?="{{formDisabled}}"/>
-	     
-	      <template if="{{formDisabled}}">
-	       <core-icon icon="create" on-click="{{toggleForm}}"></core-icon>
-	      </template>
-	      <template if="{{!formDisabled}}">
-	        <core-icon icon="cancel" on-click="{{toggleForm}}"></core-icon>
-	      </template>
-	    </div>
-	    <div id="contentContainer" layout horizontal>
-	      <cs-qrcode id="qrcode"
-	                 value="{{qrcode}}"
-	                 correctionLevel="low"
-	                 width="64"
-	                 height="64">
-	      </cs-qrcode>
-	      <div id="detailsContainer" layout vertical>
-	        <label>Description
-	          <input is="core-input" 
-	                 value="{{description}}" 
-	                 disabled?="{{formDisabled}}"/>
-	        </label>
-	        <label>Price
-	          <input is="core-input"
-	                 value="{{price}}"
-	                 disabled?="{!formDisabled}}"/>
-	        </label>
-	       
-	        <template if="{{!formDisabled}}">
-	          <input type="submit" value="Save"/>
-	        </template>
-	      </div>
-	    </div>
-	  </form>
+        <content select="input[name=name]"></content>
+        <!-- 
+        <input is="core-input" id="name" type="text" 
+               name="name" value="{{name}}" 
+               disabled>
+        -->
+        <form-controls disabled?={{formDisabled}}></form-controls>
+      </div>
+      <div id="outputContainer" layout horizontal>
+        <cs-qrcode id="qrcode" value="{{qrcode}}"
+                               correctionLevel="low"
+                               width="64"
+                               height="64">
+        </cs-qrcode>
+        
+        <div id="detailsContainer" layout vertical>
+          <content></content>
+        </div>  
+      </div>
+      <input type="hidden" name="kind" value="assets#asset" />
+    </form>
 	</template>
 	<script type="application/dart" src="asset_details.dart"></script>
 </polymer-element>

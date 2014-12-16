@@ -14,9 +14,7 @@ class AssetList extends PolymerElement implements LoadableElement {
   @observable
   List<Asset> assets = toObservable([]);
   
-  AssetList.created(): super.created() {
-    print('created');
-  }
+  AssetList.created(): super.created();
   
   void load(String href) {
     var client = session.httpClient;
@@ -40,9 +38,10 @@ class AssetList extends PolymerElement implements LoadableElement {
     e.preventDefault();
     QRCode qrcodeElem = e.currentTarget;
     assert(contextPanel != null);
-    contextPanel.href = qrcodeElem.value;
+    window.location.href = qrcodeElem.value;
   }
   
+  //TODO: Remove completely.
   /// Set once the element has loaded.
   @override
   ContextPanel contextPanel;

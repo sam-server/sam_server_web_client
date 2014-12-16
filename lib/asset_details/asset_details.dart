@@ -3,80 +3,45 @@ import 'dart:convert' show JSON;
 import 'dart:html';
 
 import 'package:polymer/polymer.dart';
-import 'package:http/browser_client.dart';
-
-import 'package:cs_elements/context_panel/context_panel.dart';
+import 'package:cs_elements/json_form/json_form.dart';
+import 'package:cs_elements/session/session.dart';
+import '../form_controls/form_controls.dart';
 
 @CustomTag('asset-details')
-class AssetDetails extends PolymerElement implements LoadableElement {
+class AssetDetails extends PolymerElement {
   static final _PRICE_PATTERN = new RegExp(r'[a-zA-Z]{3} \d+(\.\d+)?');
   
-  Map<String,dynamic> _unsavedState;
+  Map<String,dynamic> _resetData;
   
-  @observable
+  ContentElement get _content => shadowRoot.querySelector('content');
+  
+  @published
   String qrcode;
   
-  @observable
-  bool formDisabled = true;
-  void formDisabledChanged(oldValue, newValue) {
-    shadowRoot.querySelectorAll('input').forEach((elem) {
-      if (newValue) {
-        elem.classes.remove('editable');
-      } else {
-        elem.classes.add('editable');
-      }
-    });
-  }
+  @published
+  String formMethod;
   
   @observable
-  String name;
-  void nameChanged(oldValue, newValue) {
-    if (oldValue == null)
-      return;
-    _showSaveButton();
-    _unsavedState['name'] = newValue;
-  }
-  
-  @observable
-  String description;
-  descriptionChanged(oldValue, newValue) {
-    if (oldValue == null)
-      return;
-    _showSaveButton();
-    _unsavedState['description'] = newValue;
-  }
-  
-  @observable
-  String price;
-  priceChanged(o, n) {
-    if (o == null)
-      return;
-    _showSaveButton();
-    if (_PRICE_PATTERN.matchAsPrefix(n) == null) {
-      $['price'].classes.add('invalid');
-      return;
-    }
-    $['price'].classes.remove('invalid');
-    _unsavedState['price'] = n;
-  }
+  bool formDisabled;
   
   AssetDetails.created(): super.created() {
-    _unsavedState = <String,dynamic>{};
+    _resetData = <String,dynamic>{};
   }
   
   void attached() {
     super.attached();
-    $['mainform'].action = qrcode;
+    $['assetForm'].action = qrcode;
+    FormControlsElement controls = shadowRoot.querySelector('form-controls');
+    controls.onEdit.listen(editForm);
+    controls.onSave.listen(saveForm);
+    controls.onCancel.listen(cancelForm);
+    
+    if (formMethod == 'POST') {
+      this.formDisabled = false;
+    }
   }
   
-  /// The context pane which contains this element.
-  /// Set after loading.
-  ContextPanel contextPanel;
-  
-  void toggleForm(Event evt) {
-    formDisabled = !formDisabled;
-  }
-  
+  /*
   @override
   Future loadFromUri(String uri, {Map<String,dynamic> restoreData: const {}}) {
     print('loading from uri');
@@ -96,22 +61,55 @@ class AssetDetails extends PolymerElement implements LoadableElement {
       $['mainform'].action = qrcode;
       content.addAll(restoreData);
       name = content['name'];
-      description = content['description'];
-      price = content['price'];
-      if (restoreData.isNotEmpty)
-        _showSaveButton();
     });
   }
-
-  @override
-  Map<String, dynamic> saveData() {
-    _unsavedState['hello'] = 'world';
-    return _unsavedState;
+  */
+  
+  void editForm([Event e]) {
+    this.formDisabled = false;
+    void enableInput(elem) {
+      elem.disabled = false;
+      _resetData[elem.name] = elem.value;
+      elem.classes.add('editable');
+    }
+        
+    this.querySelectorAll('input').forEach(enableInput);
+    this.querySelectorAll('cs-money-input').forEach(enableInput);
   }
   
-  void _showSaveButton() {
-    shadowRoot.querySelectorAll('.hidden').forEach((Element elem) {
-      elem.classes.remove('hidden');
+  void saveForm(Event e) {
+    if (formMethod != 'POST') {
+      this.formDisabled = true;
+    }
+    JsonFormElement form = this.$['assetForm'];
+    if (formMethod == 'POST') {
+      form.action = '/assets/create';
+    }
+    form.submit(client: session.httpClient).then((result) {
+      if (result.statusCode == 200) {
+        print('Success');
+        print(JSON.decode(result.body));
+      }
     });
+  }
+  
+  void cancelForm(Event e) {
+    if (formMethod != 'POST') {
+      this.formDisabled = true;
+    }
+    void disableInput(elem) {
+      if (formMethod == 'POST') {
+        elem.value = '';
+      } else {
+        elem.disabled = true;
+        if (_resetData.containsKey(elem.name)) {
+          elem.value = _resetData[elem.name];
+        }
+        elem.classes.remove('editable');
+      }
+    }
+    
+    this.querySelectorAll('input').forEach(disableInput);
+    this.querySelectorAll('cs-money-input').forEach(disableInput);
   }
 }
