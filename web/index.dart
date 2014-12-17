@@ -10,7 +10,7 @@ void main() {
     polymerReady.then((_) {
       if (session.loggedIn) {
         AssetList assetList = querySelector('asset-list');
-        assetList.loadFromUri('/assets/user/3');
+        assetList.loadFromUri();
       } else {
         window.location.href = '/auth/login';
       }

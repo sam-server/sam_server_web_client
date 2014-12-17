@@ -10,9 +10,12 @@ import 'package:cs_elements/context_panel/context_panel.dart';
 import 'package:cs_elements/session/session.dart';
 
 @CustomTag('asset-list')
-class AssetList extends PolymerElement implements LoadableElement {
+class AssetList extends PolymerElement {
   @observable
   List<Asset> assets = toObservable([]);
+  
+  @published
+  String href;
   
   AssetList.created(): super.created();
   
@@ -37,17 +40,12 @@ class AssetList extends PolymerElement implements LoadableElement {
   void displayAsset(Event e) {
     e.preventDefault();
     QRCode qrcodeElem = e.currentTarget;
-    assert(contextPanel != null);
     window.location.href = qrcodeElem.value;
   }
-  
-  //TODO: Remove completely.
-  /// Set once the element has loaded.
-  @override
-  ContextPanel contextPanel;
 
-  @override
-  Future loadFromUri(String uri, {Map<String,dynamic> restoreData}) {
+  Future loadFromUri({String uri, Map<String,dynamic> restoreData}) {
+    if (uri == null)
+      uri = this.href;
     var client = session.httpClient;
     print('fetching assets');
     return client.get(uri).then((result) {
@@ -64,8 +62,6 @@ class AssetList extends PolymerElement implements LoadableElement {
     });
   }
   
-  @override
-  Map<String,dynamic> saveData() => <String,dynamic>{};
 }
 
 class Asset extends Observable {
