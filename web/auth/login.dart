@@ -18,11 +18,10 @@ void main() {
           query = query.trim();
           if (query.startsWith('cb=')) {
             var redirect = query.substring('cb='.length);
-            print('Redirecting to $redirect');
             window.location.href = redirect;
           }
         }
-        window.location.href = '';
+        window.location.href = '/';
       });
     });
   });
