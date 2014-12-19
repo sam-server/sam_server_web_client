@@ -2,18 +2,45 @@
 
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_input.html">
-
-<link rel="import" href="../../../../packages/cs_elements/json_form.html">
+<link rel="import" href="../../../../packages/cs_elements/json_form/json_form.html">
 
 <link rel="import" href="../password_strength/password_strength.html">
+<link rel="import" href="../../form_controls/form_controls.html">
 
 <polymer-element name="signup-form">
   <template>
-    <form is="cs-json-form" action="POST">
-      <input is="core-input" type="text" name="username" placeholder="Username" value="{{username}}">
-      <input is="core-input" type="email" name="email" placeholder="Email" preventInvalidInput>
-      <input is="core-input" type="password" name="password" placeholder="Password">
-      <input is="core-input" type="password" id="confirmPassword" placeholder ="Re-enter password">
+    <style>
+      input[is=core-input] {
+        display: block;
+      }
+      #errorContainer {
+        height: 1em;
+      }
+    </style>
+    <form is="cs-json-form" method="POST" id="mainform">
+      <div id="usernameInput" layout horizontal>
+      <!-- TODO: What form controls should look like
+      <form-controls states="disabled enabled" initState="disabled">
+        <form-control type="edit" shown="disabled"  icon="create"></form-control>
+        <form-control type="cancel" shown="enabled" icon="cancel"></form-control>
+        <form-control type="save" shown="enabled"   icon="save"></form-control>
+      </form-controls>
+      -->
+        <input is="core-input" type="text" name="username" placeholder="Username" 
+               value="{{username}}" required/>
+        <form-controls id="controls"></form-controls>
+      </div>
+      <input is="core-input" type="email" name="email" id="email" placeholder="Email" 
+             value="{{email}}" required/>
+      <div layout horizontal>
+        <input is="core-input" type="password" name="password" id="password" placeholder="Password" 
+               value="{{password}}" required>
+        <password-strength password="{{password}}" id="passwordStrength"></password-strength>
+        
+      </div>
+      <input is="core-input" type="password" id="confirmPassword" placeholder ="Re-enter password"/>
+      <input type="hidden" name="auth_type" value="userpass"/>
+      <div id="errorContainer">{{errorMessage}}</div>
     </form>
   </template>
   <script type="application/dart" src="signup_form.dart"></script>
