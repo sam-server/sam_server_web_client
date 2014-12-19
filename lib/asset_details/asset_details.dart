@@ -89,6 +89,7 @@ class AssetDetails extends PolymerElement {
       if (result.statusCode == 200) {
         print('Success');
         print(JSON.decode(result.body));
+        window.location.reload();
       }
     });
   }
