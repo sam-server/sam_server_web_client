@@ -36,14 +36,9 @@
       
       <div id="nameContainer" layout horizontal>
         <content select="input[name=name]"></content>
-        <!-- 
-        <input is="core-input" id="name" type="text" 
-               name="name" value="{{name}}" 
-               disabled>
-        -->
         <cs-form-control-panel state="{{formControlState}}">
           <cs-form-control visibleState="disabled">
-            <core-icon icon="create" on-click="{{editForm}}">
+            <core-icon icon="create" on-click="{{editForm}}"></core-icon>
           </cs-form-control>
           <cs-form-control visibleState="enabled">
             <core-icon icon="save" on-click="{{saveForm}}"></core-icon>

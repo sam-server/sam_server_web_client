@@ -63,7 +63,7 @@ class AssetDetails extends PolymerElement {
     });
   }
 
-  void cancelForm(Event e) {
+  void resetForm(Event e) {
     if (formMethod != 'POST') {
       formControlState = 'disabled';
     }
