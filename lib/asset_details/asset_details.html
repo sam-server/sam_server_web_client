@@ -9,7 +9,7 @@
 <link rel="import" href="../../../packages/cs_elements/json_form/json_form.html">
 <link rel="import" href="../../../packages/cs_elements/money_input/money_input.html">
 
-<link rel="import" href="../form_controls/form_controls.html">
+<link rel="import" href="../../../packages/cs_elements/form_controls/form_controls.html">
 
 <polymer-element name="asset-details" attributes="qrcode formMethod">
 	<template>
@@ -41,7 +41,17 @@
                name="name" value="{{name}}" 
                disabled>
         -->
-        <form-controls disabled?={{formDisabled}}></form-controls>
+        <cs-form-control-panel state="{{formControlState}}">
+          <cs-form-control visibleState="disabled">
+            <core-icon icon="create" on-click="{{editForm}}">
+          </cs-form-control>
+          <cs-form-control visibleState="enabled">
+            <core-icon icon="save" on-click="{{saveForm}}"></core-icon>
+          </cs-form-control>
+         <cs-form-control visibleState="enabled">
+           <core-icon icon="cancel" on-click="{{resetForm}}"></core-icon>
+         </cs-form-control>
+        </cs-form-control-panel>
       </div>
       <div id="outputContainer" layout horizontal>
         <cs-qrcode id="qrcode" value="{{qrcode}}"

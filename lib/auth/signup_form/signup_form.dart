@@ -22,10 +22,12 @@ class SignupForm extends PolymerElement {
   @observable
   String errorMessage;
 
+  bool get hasError => errorMessage != null && errorMessage.isNotEmpty;
+
   PathObserver _scoreObserver;
 
   SignupForm.created(): super.created() {
-    this.errorMessage = 'Password too weak';
+    this.errorMessage = 'Username not provided';
   }
 
   void attached() {
@@ -36,12 +38,30 @@ class SignupForm extends PolymerElement {
     var currentScore = _scoreObserver.open((newValue, oldValue) {
       errorMessage = (newValue <= 1) ? 'Password too weak': '';
     });
-
-    $['controls'].onSave.listen(submitForm);
+    shadowRoot.querySelector('input[name=username]')
+        ..onBlur.listen(validateForm);
+    shadowRoot.querySelector('input[name=email]')
+        ..onBlur.listen(validateForm);
+    shadowRoot.querySelector('input[name=password]')
+        ..onBlur.listen(validateForm);
   }
 
   void detached() {
     _scoreObserver.close();
+  }
+
+  void validateForm([Event e]) {
+    var emailInput = $['email'] as InputElement;
+    if (!emailInput.validity.valid)
+      errorMessage = emailInput.validationMessage;
+    if (email == null || email.isEmpty)
+      errorMessage = 'Email must be provided';
+    if (username == null || username.isEmpty)
+      errorMessage = 'Username must be provided';
+
+    if (errorMessage != null && errorMessage.isNotEmpty) {
+      return;
+    }
   }
 
   void checkPasswordsMatch(Event e) {
@@ -55,15 +75,9 @@ class SignupForm extends PolymerElement {
   }
 
   void submitForm([Event e]) {
-    var emailInput = $['email'] as InputElement;
-    if (!emailInput.validity.valid)
-      errorMessage = emailInput.validationMessage;
-    if (username == null || username.isEmpty)
-      errorMessage = 'Username must be provided';
-
-    if (errorMessage != null && errorMessage.isNotEmpty) {
+    validateForm();
+    if (hasError)
       return;
-    }
     JsonFormElement form = $['mainform'];
     SessionElement session = document.querySelector('cs-session');
     form.submit(client: session.httpClient).then((response) {
