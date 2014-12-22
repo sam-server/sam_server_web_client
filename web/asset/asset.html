@@ -10,7 +10,7 @@
     <link rel="import" href="../../../packages/cs_elements/money_input/money_input.html">
     <link rel="import" href="../../../packages/cs_elements/session/session.html">
     
-    <script type="application/dart" src="/web/asset/asset.dart"></script>
+    <script type="application/dart" src="/asset/asset.dart"></script>
     <style>
 	     html /deep/ input[is=core-input]#name {
 	        font-size: 2em;
@@ -26,29 +26,30 @@
   </head>
   
   <body fullbleed unresolved>
-    <cs-session csrfToken="<% {csrf_token} %>"></cs-session>
-    
-    <asset-details qrcode="<% qr_code %>" formMethod="PUT">
+    <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
+    <!-- 
+    <asset-details qrcode="{% qr_code %}" formMethod="PUT">
       <input is="core-input" name="name" type="text"
-             value="<% name %>"
+             value="{% name %}"
              id="name"
              disabled />
              
       <label>Description
         <input is="core-input" id="description"
                name="description"
-               value="<% description %>"
+               value="{% description %}"
                disabled />
       </label>
-      <% #price %>
+      {% #price %}
         <cs-money-input name="price" label="Price"
                      numDigits="<% {num_decimal_digits} %>"
-                     symbol="<% {symbol} %>"
-                     value="<% {value} %>"
-                     currencyCode="<% {code} %>">
+                     symbol="{% {symbol} %}"
+                     value="{% {value} %}"
+                     currencyCode="{% {code} %}">
         </cs-money-input>
-      <% /price %>
+      {% /price %}
       
     </asset-details>
+    -->
   </body>
 </html>

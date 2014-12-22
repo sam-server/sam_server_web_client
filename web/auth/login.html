@@ -9,11 +9,11 @@
     <link rel="import" href="packages/cs_elements/session/session.html">
     <link rel="import" href="packages/sam_server_web_client/auth/login_form/login_form.html">
     
-    <script type="application/dart" src="/web/auth/login.dart"></script>
+    <script type="application/dart" src="login.dart"></script>
   </head>
   
   <body fullbleed unresolved>
-    <cs-session csrfToken="<% {csrf_token} %>"></cs-session>
+    <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
     <login-form>
     </login-form>
     

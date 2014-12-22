@@ -7,17 +7,15 @@
         <link rel="import"
               href="packages/cs_elements/session/session.html">
         <link rel="import"
-              href="packages/cs_elements/money_input/money_input.html">
+              href="packages/cs_elements/money_input/money_input.html"> 
         <link rel="import"
               href="packages/sam_server_web_client/asset_details/asset_details.html">
-        
-        <script type="application/dart" src="/web/index.dart"></script>
+        <script type="application/dart" src="index.dart"></script>
     </head>
     <body fullbleed unresolved>
         <h1>Test</h1>
-        <cs-session csrfToken="<% {csrf_token} %>"></cs-session>
-        <asset-list href="<% {init_url} %>"></asset-list>
-        
+        <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
+        <asset-list href="{% {init_url} %}"></asset-list>
         <div id="createAsset">
           <h2>Create asset</h2>
           <asset-details formMethod="POST">
@@ -26,8 +24,7 @@
                    id="name">
             <label>Description
             <input is="core-input" id="description"
-                   name="description"
-                   id="name"/>
+                   name="description"/>
             </label>
             <cs-money-input name="price" label="Price"
                             currencyCode="AUD"
