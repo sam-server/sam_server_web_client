@@ -52,7 +52,7 @@ class AssetDetails extends PolymerElement {
     }
     JsonFormElement form = this.$['assetForm'];
     if (formMethod == 'POST') {
-      form.action = '/assets/create';
+      form.action = '/asset';
     }
     form.submit(client: session.httpClient).then((result) {
       if (result.statusCode == 200) {
