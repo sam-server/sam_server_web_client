@@ -42,7 +42,7 @@
       </label>
       {% #price %}
         <cs-money-input name="price" label="Price"
-                     numDigits="<% {num_decimal_digits} %>"
+                     numDigits="{% {num_decimal_digits} %}"
                      symbol="{% {symbol} %}"
                      value="{% {value} %}"
                      currencyCode="{% {code} %}">
