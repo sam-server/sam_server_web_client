@@ -11,8 +11,9 @@ transformers:
 - polymer:
     entry_points:
     - web/index.html
+    - web/asset.html
     - web/auth/login.html
-    - web/auth/create_user.html
+    - web/auth/register.html
     - example/asset_details.html
     - example/asset_list.html
     - example/main_context_example.html
