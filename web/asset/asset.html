@@ -4,30 +4,33 @@
   <head>
     <link rel="import" href="../../../packages/polymer/polymer.html">
     <link rel="import" href="../../../packages/core_elements/core_input.html">
+    <link rel="import" href="../../../packages/cs_elements/inputs/money_input.html">
     
-    <link rel="import" href="../../../packages/sam_server_web_client/asset_details/asset_details.html">
-    
-    <link rel="import" href="../../../packages/cs_elements/money_input/money_input.html">
     <link rel="import" href="../../../packages/cs_elements/session/session.html">
+    <link rel="import" href="../../../packages/sam_server_web_client/asset_details/asset_details.html">
     
     <script type="application/dart" src="asset.dart"></script>
     <style>
 	     html /deep/ input[is=core-input]#name {
 	        font-size: 2em;
 	      }
-	      html /deep/ input[is=core-input].editable {
-	        border: 1px solid lightgrey;
-	      }
-	      html cs-money-input.editable /deep/ input[is=core-input] {
-	        border: 1px solid lightgrey;
+	      
+	      html /deep/ input[is=core-input],
+	      money-input {
+	       border: none;
+	       padding-top: 5px;
 	      }
 	      
+	      html /deep/ input[is=core-input].editable,
+	      money-input.editable {
+	        border: 1px solid lightgrey;
+	      }
     </style>
   </head>
   
   <body fullbleed unresolved>
     <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
-    
+
     <asset-details qrcode="{% qr_code %}" formMethod="PUT">
       <input is="core-input" name="name" type="text"
              value="{% name %}"
@@ -40,14 +43,9 @@
                value="{% description %}"
                disabled />
       </label>
-      {% #price %}
-        <cs-money-input name="price" label="Price"
-                     numDigits="{% {num_decimal_digits} %}"
-                     symbol="{% {symbol} %}"
-                     value="{% {value} %}"
-                     currencyCode="{% {code} %}">
-        </cs-money-input>
-      {% /price %}
+      <money-input name="price" label="Price"
+                   value="{% price %}">
+      </money-input>
       
     </asset-details>
   </body>

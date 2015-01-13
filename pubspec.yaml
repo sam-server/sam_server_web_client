@@ -5,6 +5,8 @@ dependencies:
   cs_elements:
     path: /Users/ovangle/Programming/sam_server3_workspace/cs_elements
   polymer: any
+  polymer_ajax_form:
+    path: /Users/ovangle/Programming/sam_server3_workspace/polymer_ajax_form
   quiver: any
   core_elements: '>=0.5.0'
 transformers:

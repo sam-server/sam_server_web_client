@@ -3,9 +3,8 @@ import 'dart:convert' show JSON;
 import 'dart:html';
 
 import 'package:polymer/polymer.dart';
-import 'package:cs_elements/json_form/json_form.dart';
+import 'package:polymer_ajax_form/ajax_form.dart';
 import 'package:cs_elements/session/session.dart';
-import 'package:cs_elements/form_controls/form_controls.dart';
 
 @CustomTag('asset-details')
 class AssetDetails extends PolymerElement {
@@ -24,6 +23,11 @@ class AssetDetails extends PolymerElement {
   @observable
   String formControlState;
 
+  @observable
+  SessionElement session;
+
+  StreamSubscription _sessionHeadersObserver;
+
   AssetDetails.created(): super.created() {
     _resetData = <String,dynamic>{};
   }
@@ -32,6 +36,18 @@ class AssetDetails extends PolymerElement {
     super.attached();
     $['assetForm'].action = qrcode;
     formControlState = formMethod == 'POST' ? 'enabled': 'disabled';
+
+    Polymer.onReady.then((_) {
+      session = document.querySelector('cs-session');
+    });
+  }
+
+  void detached() {
+    if (_sessionHeadersObserver != null) {
+      _sessionHeadersObserver.cancel().then((_) {
+        _sessionHeadersObserver = null;
+      });
+    }
   }
 
   void editForm([Event e]) {
@@ -50,20 +66,30 @@ class AssetDetails extends PolymerElement {
     if (formMethod != 'POST') {
       formControlState = 'enabled';
     }
-    JsonFormElement form = this.$['assetForm'];
+    AjaxFormElement form = this.$['assetForm'];
     if (formMethod == 'POST') {
       form.action = '/asset';
     }
-    form.submit(client: session.httpClient).then((result) {
-      if (result.statusCode == 200) {
-        print('Success');
-        print(JSON.decode(result.body));
-        window.location.reload();
+
+    form.onFormComplete.first.then((evt) {
+      var xhr = evt.detail['xhr'];
+      if (xhr.status == 200) {
+        var responseData = JSON.decode(xhr.response);
+        responseData.forEach((k,v) {
+          _resetData[k] = v;
+        });
+        this.resetForm();
+      } else {
+        //TODO: Better error handling.
+        print('An error occurred: ${xhr.status}');
+        print(xhr.response);
       }
     });
+
+    form.submit();
   }
 
-  void resetForm(Event e) {
+  void resetForm([Event e]) {
     if (formMethod != 'POST') {
       formControlState = 'disabled';
     }
@@ -80,6 +106,6 @@ class AssetDetails extends PolymerElement {
     }
 
     this.querySelectorAll('input').forEach(disableInput);
-    this.querySelectorAll('cs-money-input').forEach(disableInput);
+    this.querySelectorAll('money-input').forEach(disableInput);
   }
 }

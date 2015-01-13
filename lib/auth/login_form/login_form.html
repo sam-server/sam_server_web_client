@@ -3,7 +3,7 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_input.html">
 
-<link rel="import" href="../../../../packages/cs_elements/json_form/json_form.html">
+<link rel="import" href="../../../../packages/polymer_ajax_form/ajax_form.html">
 
 <polymer-element name="login-form">
   <template>
@@ -12,7 +12,10 @@
         height: 1em;
       }
     </style>
-    <form is="cs-json-form" id="form" method="POST">
+    <form is="ajax-form" enctype="application/json"
+                         headers="{{session.sessionHeaders}}"
+                         method="POST"
+                         handleAs="json">
       <div id="inputContainer" layout vertical>
 	      <input is="core-input" type="text" name="username" 
 	             value="{{username}}"

@@ -5,9 +5,10 @@
 <link rel="import" href="../../../packages/core_elements/core_input.html">
 <link rel="import" href="../../../packages/core_elements/core_icons.html">
 
+<link rel="import" href="../../../packages/polymer_ajax_form/ajax_form.html">
+
+<link rel="import" href="../../../packages/cs_elements/inputs/money_input.html">
 <link rel="import" href="../../../packages/cs_elements/qrcode/qrcode.html">
-<link rel="import" href="../../../packages/cs_elements/json_form/json_form.html">
-<link rel="import" href="../../../packages/cs_elements/money_input/money_input.html">
 
 <link rel="import" href="../../../packages/cs_elements/form_controls/form_controls.html">
 
@@ -32,7 +33,11 @@
 	      color: blue; 
 	    }
 	  </style>
-    <form is="cs-json-form" method="{{formMethod}}" id="assetForm" layout vertical>
+    <form is="ajax-form" id="assetForm"
+          method="{{formMethod}}" 
+          enctype="application/json"
+          headers="{{session.sessionHeaders}}"
+          layout vertical>
       
       <div id="nameContainer" layout horizontal>
         <content select="input[name=name]"></content>
