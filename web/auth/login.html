@@ -6,16 +6,14 @@
     
     <link rel="import" href="packages/polymer/polymer.html">
     <link rel="import" href="packages/cs_elements/session/session.html">
-    <link rel="import" href="packages/sam_server_web_client/auth/login_form/login_form.html">
+    <link rel="import" href="packages/cs_elements/auth/user_context.html">
     
     <script type="application/dart" src="login.dart"></script>
   </head>
   
-  <body fullbleed unresolved>
-    <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
-    <login-form>
-    </login-form>
+  <body fullbleed unresolved layout vertical center center-justified>
     
-    <a href="/auth/register">Signup</a>
+    <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
+    <user-context></user-context>
   </body>
 </html>
