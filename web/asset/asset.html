@@ -7,8 +7,10 @@
     <link rel="import" href="../../../packages/cs_elements/inputs/money_input.html">
     
     <link rel="import" href="../../../packages/cs_elements/session/session.html">
+    <link rel="import" href="../../../packages/cs_elements/asset/details/asset_details.html">
+    <!-- 
     <link rel="import" href="../../../packages/sam_server_web_client/asset_details/asset_details.html">
-    
+    -->
     <script type="application/dart" src="asset.dart"></script>
     <style>
 	     html /deep/ input[is=core-input]#name {
@@ -30,7 +32,9 @@
   
   <body fullbleed unresolved>
     <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
-
+    
+    <asset-details asset="{% resource %}"></asset-details>
+    <!-- 
     <asset-details qrcode="{% qr_code %}" formMethod="PUT">
       <input is="core-input" name="name" type="text"
              value="{% name %}"
@@ -48,5 +52,6 @@
       </money-input>
       
     </asset-details>
+    -->
   </body>
 </html>
