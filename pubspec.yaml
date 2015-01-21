@@ -10,6 +10,8 @@ dependencies:
   quiver: any
   core_elements: '>=0.5.0'
 transformers:
+- $dart2js:
+    suppressWarnings: false
 - polymer:
     entry_points:
     - web/index.html
