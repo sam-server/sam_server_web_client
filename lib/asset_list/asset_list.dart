@@ -13,13 +13,14 @@ import 'package:cs_elements/session/session.dart';
 class AssetList extends PolymerElement {
   @observable
   List<Asset> assets = toObservable([]);
-  
+
   @published
   String href;
-  
+
   AssetList.created(): super.created();
-  
+
   void load(String href) {
+    var session = document.querySelector('cs-session');
     var client = session.httpClient;
     client.get(href).then((result) {
       if (result.statusCode != 200) {
@@ -36,7 +37,7 @@ class AssetList extends PolymerElement {
       }
     });
   }
-  
+
   void displayAsset(Event e) {
     e.preventDefault();
     QRCode qrcodeElem = e.currentTarget;
@@ -46,6 +47,7 @@ class AssetList extends PolymerElement {
   Future loadFromUri({String uri, Map<String,dynamic> restoreData}) {
     if (uri == null)
       uri = this.href;
+    var session = document.querySelector('cs-session');
     var client = session.httpClient;
     print('fetching assets');
     return client.get(uri).then((result) {
@@ -61,7 +63,7 @@ class AssetList extends PolymerElement {
       }
     });
   }
-  
+
 }
 
 class Asset extends Observable {
@@ -69,9 +71,9 @@ class Asset extends Observable {
   String qrcode;
   @observable
   String name;
-  
+
   Asset(this.name, this.qrcode);
-  
+
   Asset.fromMap(Map<String,dynamic> map):
     this(map['name'], map['qr_code']);
 }
