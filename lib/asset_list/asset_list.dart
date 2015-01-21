@@ -3,7 +3,6 @@ import 'dart:convert' show JSON;
 import 'dart:html';
 
 import 'package:polymer/polymer.dart';
-import 'package:http/browser_client.dart';
 
 import 'package:cs_elements/qrcode/qrcode.dart';
 import 'package:cs_elements/context_panel/context_panel.dart';
