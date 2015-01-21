@@ -47,17 +47,18 @@
           </cs-form-control>
           <cs-form-control visibleState="enabled">
             <core-icon icon="save" on-click="{{saveForm}}"></core-icon>
-          </cs-form-control>
+          </cs-form-control>``
          <cs-form-control visibleState="enabled">
            <core-icon icon="cancel" on-click="{{resetForm}}"></core-icon>
          </cs-form-control>
         </cs-form-control-panel>
       </div>
       <div id="outputContainer" layout horizontal>
+        <!-- Any smaller than 96x96 and the reader won't work. -->
         <cs-qrcode id="qrcode" value="{{qrcode}}"
-                               correctionLevel="low"
-                               width="64"
-                               height="64">
+                               correctionLevel="high"
+                               width="96"
+                               height="96">
         </cs-qrcode>
         
         <div id="detailsContainer" layout vertical>
