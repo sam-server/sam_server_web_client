@@ -16,6 +16,7 @@ transformers:
     entry_points:
     - web/index.html
     - web/asset/asset.html
+    - web/asset/create_asset.html
     - web/auth/login.html
     - web/auth/register.html
     - example/asset_details.html
