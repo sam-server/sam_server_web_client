@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <link rel="import"
-              href="packages/sam_server_web_client/main_context/main_context.html">
-        <link rel="import"
-              href="packages/cs_elements/session/session.html">
-        <link rel="import"
-              href="packages/cs_elements/inputs/money_input.html"> 
-        <link rel="import"
-              href="packages/sam_server_web_client/asset_details/asset_details.html">
-        <script type="application/dart" src="index.dart"></script>
-    </head>
-    <body fullbleed unresolved>
-        <h1>Test</h1>
-        <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
-        <asset-list href="{% {init_url} %}"></asset-list>
-        <div id="createAsset">
-          <h2>Create asset</h2>
-          <asset-details formMethod="POST">
-            <input is="core-input" name="name" type="text"
-                   placeholder="Asset name"
-                   id="name">
-            <label>Description
-            <input is="core-input" id="description"
-                   name="description"/>
-            </label>
-            <money-input name="price" label="Price"
-                            currencyCode="AUD"
-                            placeholder="Enter price"
-                            symbol="$">
-            </money-input>
-          </asset-details>
-        </div>
-        
-    </body>
+<head>
+<!-- XTag imports -->
+
+<link rel="import"
+      href="packages/cs_elements/session/session.html">
+<link rel="import"
+      href="packages/cs_elements/asset/list/asset_list.html">
+<link rel="import"
+      href="packages/cs_elements/inputs/money_input.html">
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="packages/cs_elements/generic/common.css">
+<link rel="stylesheet" href="index.css">
+
+<style>
+  
+</style>
+
+<script type="application/dart" src="index.dart"></script>
+</head>
+<body fullbleed layout vertical>
+  <img class="logo" src="/sam_logo.svg">
+  <div id="main" flex layout horizontal unresolved>
+    <div id="panel" layout vertical>
+    </div>
+    <asset-list assetList="{% resource %}"></asset-list>
+    <!--  <div id="panel"></div> -->
+  </div>
+  <cs-session csrfToken="{% {csrf_token} %}"></cs-session> 
+</body>
 </html>

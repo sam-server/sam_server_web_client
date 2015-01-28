@@ -2,38 +2,28 @@
 
 <html>
   <head>
+    
+    <!-- Polymer imports -->
+    
     <link rel="import" href="../../../packages/polymer/polymer.html">
     <link rel="import" href="../../../packages/core_elements/core_input.html">
     <link rel="import" href="../../../packages/cs_elements/inputs/money_input.html">
     
     <link rel="import" href="../../../packages/cs_elements/session/session.html">
     <link rel="import" href="../../../packages/cs_elements/asset/details/asset_details.html">
-    <!-- 
-    <link rel="import" href="../../../packages/sam_server_web_client/asset_details/asset_details.html">
-    -->
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../../packages/cs_elements/generic/common.css">
+    <link rel="stylesheet" href="asset.css">
+
     <script type="application/dart" src="asset.dart"></script>
-    <style>
-	     html /deep/ input[is=core-input]#name {
-	        font-size: 2em;
-	      }
-	      
-	      html /deep/ input[is=core-input],
-	      money-input {
-	       border: none;
-	       padding-top: 5px;
-	      }
-	      
-	      html /deep/ input[is=core-input].editable,
-	      money-input.editable {
-	        border: 1px solid lightgrey;
-	      }
-    </style>
   </head>
   
-  <body fullbleed unresolved>
+  <body fullbleed layout vertical unresolved>
     <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
     
-    <asset-details asset="{% resource %}"></asset-details>
+    <img class="logo" src="/sam_logo.svg">
+    <asset-details asset="{% resource %}" flex></asset-details>
     <!-- 
     <asset-details qrcode="{% qr_code %}" formMethod="PUT">
       <input is="core-input" name="name" type="text"

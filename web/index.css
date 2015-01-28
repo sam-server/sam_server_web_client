@@ -1,0 +1,55 @@
+
+
+#main {
+	/*height: 100%;*/
+	/*width: 100%;*/
+	/*height: inherit;*/
+	overflow-y: scroll;
+}
+
+body {
+	background-color: #272732;
+	
+}
+
+header[is=sam-header] {
+	
+}
+
+header[is=sam-header] /deep/ .logo {
+  cursor: pointer;
+}
+
+/**
+header[is=sam-header] {
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 91%,rgba(39,39,50,1) 99%);
+  cursor: default;
+  display: block;
+}
+**/
+
+header h1,p {
+  margin: 10px;
+  text-shadow: 1px 1px white;
+  margin-bottom: 15px;
+}
+
+header p {
+	line-height: 1.5em;
+}
+
+#panel {
+	width: 20%;
+	/* background-color: white; */
+}
+
+asset-list {
+	width: 60%;
+}
+
+img.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 96px;
+}

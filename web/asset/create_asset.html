@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <!-- Polymer imports -->
+    <link rel="import" href="../../../packages/polymer/polymer.html">
+    <link rel="import" href="../../../packages/cs_elements/asset/details/asset_details.html">
+    <link rel="import" href="../../../packages/cs_elements/session/session.html">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../../packages/cs_elements/generic/common.css">
+    <link rel="stylesheet" href="asset.css">
+  
+    <script type="application/dart" src="asset.dart"></script>
+    
+  </head>
+  <body fullbleed layout vertical unresolved>
+    <cs-session csrfToken="{% csrf_token %}"></cs-session>
+    
+    <img class="logo" src="/sam_logo.svg">
+    
+    <asset-details asset="{% resource %}" create flex></asset-details>
+  </body>
+</html>

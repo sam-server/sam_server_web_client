@@ -4,16 +4,22 @@
   <head>
     <meta charset="utf-8">
     
+    <!-- XTag imports -->
     <link rel="import" href="packages/polymer/polymer.html">
     <link rel="import" href="packages/cs_elements/session/session.html">
     <link rel="import" href="packages/cs_elements/auth/user_context.html">
     
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="packages/cs_elements/generic/common.css">
+    <link rel="stylesheet" href="login.css">
+    
     <script type="application/dart" src="login.dart"></script>
+    
   </head>
   
   <body fullbleed unresolved layout vertical center center-justified>
-    
     <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
+    <img class="logo" src="/sam_logo.svg">
     <user-context></user-context>
   </body>
 </html>

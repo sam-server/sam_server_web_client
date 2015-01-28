@@ -1,0 +1,28 @@
+html /deep/ input[is=core-input]#name {
+  font-size: 2em;
+}
+
+body {
+  background-color: #272732;
+}
+
+html /deep/ input[is=core-input],
+money-input {
+ border: none;
+ padding-top: 5px;
+}
+
+html /deep/ input[is=core-input].editable,
+money-input.editable {
+  border: 1px solid lightgrey;
+}
+
+asset-details {
+ padding-left: 300px;
+ padding-top: 20px;
+}
+
+
+asset-details /deep/ .content {
+  margin-left: 300px;
+}
