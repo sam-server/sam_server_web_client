@@ -10,8 +10,6 @@ dependencies:
   quiver: any
   core_elements: '>=0.5.0'
 transformers:
-- $dart2js:
-    suppressWarnings: false
 - polymer:
     entry_points:
     - web/index.html
@@ -23,3 +21,5 @@ transformers:
     - example/asset_list.html
     - example/main_context_example.html
     - example/strength_meter.html
+- $dart2js:
+    suppressWarnings: false
