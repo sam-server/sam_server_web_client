@@ -100,7 +100,7 @@ packages:
   quiver:
     description: quiver
     source: hosted
-    version: "0.18.2"
+    version: "0.20.0"
   rational:
     description: rational
     source: hosted
