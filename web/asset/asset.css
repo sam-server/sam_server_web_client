@@ -18,11 +18,15 @@ money-input.editable {
 }
 
 asset-details {
- padding-left: 300px;
  padding-top: 20px;
+ padding-left: 20px;
 }
 
 
 asset-details /deep/ .content {
   margin-left: 300px;
+}
+
+core-drawer-panel[narrow] > div[drawer] {
+	background-color: cadetblue;
 }

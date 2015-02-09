@@ -2,13 +2,16 @@
 
 <html>
   <head>
+  
+    <meta name="viewport" content="width=device-width">
     
     <!-- Polymer imports -->
     
     <link rel="import" href="../../../packages/polymer/polymer.html">
     <link rel="import" href="../../../packages/core_elements/core_input.html">
-    <link rel="import" href="../../../packages/cs_elements/inputs/money_input.html">
+    <link rel="import" href="../../../packages/core_elements/core_drawer_panel.html">
     
+    <link rel="import" href="../../../packages/cs_elements/generic/drawer_panel_toggle/drawer_panel_toggle.html">
     <link rel="import" href="../../../packages/cs_elements/session/session.html">
     <link rel="import" href="../../../packages/cs_elements/asset/details/asset_details.html">
     
@@ -22,7 +25,14 @@
   <body fullbleed layout vertical unresolved>
     <cs-session csrfToken="{% {csrf_token} %}"></cs-session>
     
-    <img class="logo" src="/sam_logo.svg">
-    <asset-details asset="{% resource %}" flex></asset-details>
+    <core-drawer-panel drawerWidth="300px">
+      <div drawer>
+        <img class="logo" src="/sam_logo.svg">
+        </div>
+      <div main layout horizontal center>
+        <drawer-panel-toggle expanded core-drawer-toggle></drawer-panel-toggle>
+        <asset-details asset="{% resource %}" flex></asset-details>
+      </div>
+    </core-drawer-panel>
   </body>
 </html>

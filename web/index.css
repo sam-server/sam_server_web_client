@@ -44,12 +44,19 @@ header p {
 }
 
 asset-list {
-	width: 60%;
+	width: 500px;
+	max-width: 80%;
 }
 
-img.logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  height: 96px;
+asset-list /deep/ asset-list-item {
+	height: 30px;
 }
+
+asset-list /deep/ asset-list-item:hover {
+	
+}
+
+core-drawer-panel[narrow] > div[drawer] {
+  background-color: cadetblue;
+}
+

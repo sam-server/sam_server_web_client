@@ -2,12 +2,19 @@
 
 <html>
 <head>
+<meta name="viewport" content="width=device-width">
+
 <!-- XTag imports -->
+
+<link rel="import"
+      href="packages/core_elements/core_drawer_panel.html">
 
 <link rel="import"
       href="packages/cs_elements/session/session.html">
 <link rel="import"
       href="packages/cs_elements/asset/list/asset_list.html">
+<link rel="import"
+      href="packages/cs_elements/generic/drawer_panel_toggle/drawer_panel_toggle.html">
 <link rel="import"
       href="packages/cs_elements/inputs/money_input.html">
 
@@ -16,19 +23,25 @@
 <link rel="stylesheet" href="index.css">
 
 <style>
+img {
+  display: inline-block;
+}
   
 </style>
 
 <script type="application/dart" src="index.dart"></script>
 </head>
 <body fullbleed layout vertical>
-  <img class="logo" src="/sam_logo.svg">
-  <div id="main" flex layout horizontal unresolved>
-    <div id="panel" layout vertical>
+  <core-drawer-panel drawerWidth="300px">
+    <div drawer>
+      <img class="logo" src="/sam_logo.svg">
     </div>
-    <asset-list assetList="{% resource %}"></asset-list>
-    <!--  <div id="panel"></div> -->
-  </div>
+    <div main layout horizontal center>
+      <drawer-panel-toggle expanded core-drawer-toggle></drawer-panel-toggle>
+        
+      <asset-list assetList="{% resource %}"></asset-list>
+    </div>
+  </core-drawer-panel>
   <cs-session csrfToken="{% {csrf_token} %}"></cs-session> 
 </body>
 </html>
