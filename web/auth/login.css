@@ -5,3 +5,9 @@ body {
 user-context {
 	border: none;
 }
+
+@media screen and (max-width: 640px) {
+  img.logo {
+    display: none;
+  }
+}
