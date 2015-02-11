@@ -27,6 +27,6 @@ asset-details /deep/ .content {
   margin-left: 300px;
 }
 
-core-drawer-panel[narrow] > div[drawer] {
+core-drawer-panel[narrow] > nav-bar {
 	background-color: cadetblue;
 }

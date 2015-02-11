@@ -17,6 +17,10 @@
       href="packages/cs_elements/generic/drawer_panel_toggle/drawer_panel_toggle.html">
 <link rel="import"
       href="packages/cs_elements/inputs/money_input.html">
+<link rel="import"
+      href="packages/cs_elements/nav_bar/nav_bar.html">
+<link rel="import"
+      href="packages/cs_elements/nav_bar/nav_bar_item.html">
 
 <!-- Stylesheets -->
 <link rel="stylesheet" href="packages/cs_elements/generic/common.css">
@@ -31,11 +35,14 @@ img {
 
 <script type="application/dart" src="index.dart"></script>
 </head>
-<body fullbleed layout vertical>
+<body fullbleed layout vertical unresolved>
   <core-drawer-panel drawerWidth="300px">
-    <div drawer>
-      <img class="logo" src="/sam_logo.svg">
-    </div>
+     <nav-bar drawer>
+        <nav-bar-item href="/">Accounts</nav-bar-item>
+        <nav-bar-item href="/">Reports</nav-bar-item>
+        <nav-bar-item href="/">Analytics</nav-bar-item>
+     </nav-bar>
+     <!-- <img class="logo" src="/sam_logo.svg"> -->
     <div main layout horizontal center>
       <drawer-panel-toggle expanded core-drawer-toggle></drawer-panel-toggle>
         

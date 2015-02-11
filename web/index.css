@@ -56,7 +56,7 @@ asset-list /deep/ asset-list-item:hover {
 	
 }
 
-core-drawer-panel[narrow] > div[drawer] {
+core-drawer-panel[narrow] > nav-bar {
   background-color: cadetblue;
 }
 
